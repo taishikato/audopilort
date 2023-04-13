@@ -36,7 +36,7 @@ const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
       name: "Articles",
       href: "/dashboard/articles",
       icon: DocumentDuplicateIcon,
-      current: pathname === "/dashboard/articles",
+      current: pathname.includes("articles"),
     },
   ];
 
