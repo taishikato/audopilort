@@ -1,3 +1,5 @@
+"use client";
+
 export default function Articles() {
   return (
     <main className="lg:pl-72">

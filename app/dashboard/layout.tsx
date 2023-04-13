@@ -97,11 +97,13 @@ const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
                 {/* Sidebar component, swap this element with another sidebar if you like */}
                 <div className="flex flex-col px-6 pb-2 overflow-y-auto bg-white grow gap-y-5">
                   <div className="flex items-center h-16 shrink-0">
-                    <img
-                      className="w-auto h-8"
-                      src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
-                      alt="Your Company"
-                    />
+                    <Link href="/">
+                      <img
+                        className="w-auto h-8"
+                        src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
+                        alt="Your Company"
+                      />
+                    </Link>
                   </div>
                   <nav className="flex flex-col flex-1">
                     <ul role="list" className="flex flex-col flex-1 gap-y-7">
@@ -179,11 +181,13 @@ const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
         {/* Sidebar component, swap this element with another sidebar if you like */}
         <div className="flex flex-col px-6 overflow-y-auto bg-white border-r border-gray-200 grow gap-y-5">
           <div className="flex items-center h-16 shrink-0">
-            <img
-              className="w-auto h-8"
-              src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
-              alt="Your Company"
-            />
+            <Link href="/">
+              <img
+                className="w-auto h-8"
+                src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
+                alt="Your Company"
+              />
+            </Link>
           </div>
           <nav className="flex flex-col flex-1">
             <ul role="list" className="flex flex-col flex-1 gap-y-7">
