@@ -1,4 +1,5 @@
 import "./global.css";
+import SupabaseProvider from "./supabase-provider";
 
 export default function RootLayout({
   children,
@@ -12,7 +13,9 @@ export default function RootLayout({
         head.tsx. Find out more at https://beta.nextjs.org/docs/api-reference/file-conventions/head
       */}
       <head />
-      <body className="min-h-screen bg-slate-50">{children}</body>
+      <body className="min-h-screen bg-slate-50">
+        <SupabaseProvider>{children}</SupabaseProvider>
+      </body>
     </html>
   );
 }
