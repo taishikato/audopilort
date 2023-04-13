@@ -1,11 +1,16 @@
+"use client";
+
 import Link from "next/link";
 import { DocumentIcon } from "@heroicons/react/24/outline";
+import { useParams } from "next/navigation";
 
 function classNames(...classes: any) {
   return classes.filter(Boolean).join(" ");
 }
 
 const ArticlesLayout = ({ children }: { children: React.ReactNode }) => {
+  const { id } = useParams();
+
   return (
     <>
       {children}
@@ -20,7 +25,7 @@ const ArticlesLayout = ({ children }: { children: React.ReactNode }) => {
             <Link
               href="/dashboard/articles/123"
               className={classNames(
-                true
+                id === "123"
                   ? "bg-gray-50 text-indigo-600"
                   : "text-gray-700 hover:text-indigo-600 hover:bg-gray-50",
                 "group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold"
@@ -28,7 +33,7 @@ const ArticlesLayout = ({ children }: { children: React.ReactNode }) => {
             >
               <DocumentIcon
                 className={classNames(
-                  true
+                  id === "123"
                     ? "text-indigo-600"
                     : "text-gray-400 group-hover:text-indigo-600",
                   "h-6 w-6 shrink-0"
@@ -42,7 +47,7 @@ const ArticlesLayout = ({ children }: { children: React.ReactNode }) => {
             <Link
               href="/dashboard/articles/456"
               className={classNames(
-                false
+                id === "456"
                   ? "bg-gray-50 text-indigo-600"
                   : "text-gray-700 hover:text-indigo-600 hover:bg-gray-50",
                 "group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold"
@@ -50,7 +55,7 @@ const ArticlesLayout = ({ children }: { children: React.ReactNode }) => {
             >
               <DocumentIcon
                 className={classNames(
-                  false
+                  id === "456"
                     ? "text-indigo-600"
                     : "text-gray-400 group-hover:text-indigo-600",
                   "h-6 w-6 shrink-0"
