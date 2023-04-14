@@ -4,18 +4,10 @@ import Head from "next/head";
 import { Header } from "./components/Header";
 import { Hero } from "./components/Hero";
 import { Footer } from "./components/Footer";
-import {
-  createBrowserSupabaseClient,
-  createServerComponentSupabaseClient,
-} from "@supabase/auth-helpers-nextjs";
-import { headers, cookies } from "next/headers";
-import { redirect, useRouter } from "next/navigation";
+import { createBrowserSupabaseClient } from "@supabase/auth-helpers-nextjs";
+import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
-
-// do not cache this page
-export const revalidate = 0;
-
-export const runtime = "experimental-edge";
+import { v4 as uuidv4 } from "uuid";
 
 export default function Home() {
   const [supabase] = useState(() => createBrowserSupabaseClient());
@@ -42,6 +34,12 @@ export default function Home() {
         await supabase.from("users").insert({
           id: user.id,
           email: user.email,
+        });
+
+        const apiKey = uuidv4();
+        await supabase.from("api_keys").insert({
+          user_id: user.id,
+          api_key: apiKey,
         });
       }
 
