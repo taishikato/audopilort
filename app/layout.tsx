@@ -12,8 +12,10 @@ export default function RootLayout(props: { children: React.ReactNode }) {
   useEffect(() => {
     const {
       data: { subscription },
-    } = supabase.auth.onAuthStateChange(() => {
+    } = supabase.auth.onAuthStateChange((event: string) => {
       router.refresh();
+
+      if (event === "SIGNED_OUT") router.push("/");
     });
 
     return () => {
