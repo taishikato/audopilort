@@ -87,7 +87,7 @@ export default function Dashboard() {
             </div>
 
             <div className="px-4 py-6 max-w-7xl sm:px-6 lg:px-8">
-              <h2 className="mb-2 text-xl font-bold tracking-tight text-gray-800">
+              <h2 className="mb-6 text-xl font-bold tracking-tight text-gray-800">
                 Settings
               </h2>
               <label
@@ -97,7 +97,7 @@ export default function Dashboard() {
                 Topics for autopilot to write about
               </label>
               <form
-                className="flex items-center mt-2 space-x-2"
+                className="flex items-center mt-2 mb-5 space-x-2"
                 onSubmit={(e) => onSubmit(e)}
               >
                 <input
@@ -115,6 +115,28 @@ export default function Dashboard() {
                 >
                   Save
                 </button>
+              </form>
+
+              <label
+                htmlFor="topic"
+                className="block text-sm font-medium leading-6 text-gray-900"
+              >
+                API
+              </label>
+              <form
+                className="flex items-center mt-2 space-x-2"
+                onSubmit={(e) => onSubmit(e)}
+              >
+                <input
+                  type="text"
+                  name="topic"
+                  id="topic"
+                  className="min-w-[300px] p-2 text-gray-900 border-0 rounded-md shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                  placeholder="Latest AI news"
+                  value={apiKey ?? ""}
+                  onChange={(e) => setTopic(e.target.value)}
+                  disabled
+                />
               </form>
             </div>
           </div>
