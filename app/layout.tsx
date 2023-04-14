@@ -1,11 +1,31 @@
+"use client";
+
+import { useRouter } from "next/navigation";
 import "./global.css";
 import SupabaseProvider from "./supabase-provider";
+import { createBrowserSupabaseClient } from "@supabase/auth-helpers-nextjs";
+import { useEffect, useState } from "react";
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
+  const [supabase] = useState(() => createBrowserSupabaseClient());
+  const router = useRouter();
+
+  useEffect(() => {
+    const {
+      data: { subscription },
+    } = supabase.auth.onAuthStateChange(() => {
+      router.refresh();
+    });
+
+    return () => {
+      subscription.unsubscribe();
+    };
+  }, [supabase, router]);
+
   return (
     <html lang="en" className="antialiased scroll-smooth">
       {/*

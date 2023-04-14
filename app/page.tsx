@@ -2,8 +2,23 @@ import Head from "next/head";
 import { Header } from "./components/Header";
 import { Hero } from "./components/Hero";
 import { Footer } from "./components/Footer";
+import { createServerComponentSupabaseClient } from "@supabase/auth-helpers-nextjs";
+import { headers, cookies } from "next/headers";
+import { redirect } from "next/navigation";
 
-export default function Home() {
+// do not cache this page
+export const revalidate = 0;
+
+export default async function Home() {
+  const supabase = createServerComponentSupabaseClient({
+    headers,
+    cookies,
+  });
+
+  const { data: session } = await supabase.auth.getSession();
+
+  if (session.session) redirect("/dashboard");
+
   return (
     <>
       <Head>

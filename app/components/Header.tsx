@@ -4,11 +4,11 @@ import { Fragment } from "react";
 import Link from "next/link";
 import { Popover, Transition } from "@headlessui/react";
 import clsx from "clsx";
-
 import { Button } from "./Button";
 import { Container } from "./Container";
 import { Logo } from "./Logo";
 import { NavLink } from "./NavLink";
+import { useSupabase } from "../supabase-provider";
 
 function MobileNavLink({ href, children }: any) {
   return (
@@ -92,6 +92,14 @@ function MobileNavigation() {
 }
 
 export function Header() {
+  const { supabase } = useSupabase();
+
+  const signInWithGoogle = async () => {
+    const { data, error } = await supabase.auth.signInWithOAuth({
+      provider: "google",
+    });
+  };
+
   return (
     <header className="py-10">
       <Container>
@@ -108,9 +116,14 @@ export function Header() {
           </div>
           <div className="flex items-center gap-x-5 md:gap-x-8">
             <div className="hidden md:block">
-              <NavLink href="/login">Sign in</NavLink>
+              <button
+                className="inline-block px-2 py-1 text-sm rounded-lg text-slate-700 hover:bg-slate-100 hover:text-slate-900"
+                onClick={signInWithGoogle}
+              >
+                Sign in
+              </button>
             </div>
-            <Button href="/register" color="blue">
+            <Button color="blue" onClick={signInWithGoogle}>
               <span>
                 Get started <span className="hidden lg:inline">today</span>
               </span>
