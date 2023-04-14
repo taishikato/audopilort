@@ -9,6 +9,8 @@ import { redirect } from "next/navigation";
 // do not cache this page
 export const revalidate = 0;
 
+export const runtime = "experimental-edge";
+
 export default async function Home() {
   const supabase = createServerComponentSupabaseClient({
     headers,
