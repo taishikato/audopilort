@@ -217,7 +217,7 @@ const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
                 <ul role="list" className="-mx-2 space-y-1">
                   {navigation.map((item) => (
                     <li key={item.name}>
-                      <a
+                      <Link
                         href={item.href}
                         className={classNames(
                           item.current
@@ -236,7 +236,7 @@ const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
                           aria-hidden="true"
                         />
                         {item.name}
-                      </a>
+                      </Link>
                     </li>
                   ))}
                 </ul>
