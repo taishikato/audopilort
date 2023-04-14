@@ -29,24 +29,44 @@ export interface Database {
           user_id?: string
         }
       }
-      topics: {
+      articles: {
         Row: {
           content: string | null
           created_at: string | null
           id: string
-          user_id: string | null
+          user_id: string
         }
         Insert: {
           content?: string | null
           created_at?: string | null
           id?: string
-          user_id?: string | null
+          user_id: string
         }
         Update: {
           content?: string | null
           created_at?: string | null
           id?: string
-          user_id?: string | null
+          user_id?: string
+        }
+      }
+      topics: {
+        Row: {
+          content: string | null
+          created_at: string | null
+          id: string
+          user_id: string
+        }
+        Insert: {
+          content?: string | null
+          created_at?: string | null
+          id?: string
+          user_id: string
+        }
+        Update: {
+          content?: string | null
+          created_at?: string | null
+          id?: string
+          user_id?: string
         }
       }
       users: {
