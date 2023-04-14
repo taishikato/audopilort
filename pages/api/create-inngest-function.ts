@@ -9,7 +9,7 @@ import { serve } from "inngest/next";
 const inngest = new Inngest({ name: "Autopilot" });
 const fn = inngest.createFunction(
   { name: "Article creation" },
-  { cron: "TZ=America/Los_Angeles 0 8 * * *" },
+  { cron: "TZ=America/Los_Angeles 0 14 * * *" },
   async ({ event }) => {
     console.log("yo");
   }
