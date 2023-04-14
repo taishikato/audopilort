@@ -121,7 +121,7 @@ export default function Dashboard() {
                 htmlFor="topic"
                 className="block text-sm font-medium leading-6 text-gray-900"
               >
-                API
+                API to fetch your articles
               </label>
               <form
                 className="flex items-center mt-2 space-x-2"
@@ -131,10 +131,9 @@ export default function Dashboard() {
                   type="text"
                   name="topic"
                   id="topic"
-                  className="min-w-[300px] p-2 text-gray-900 border-0 rounded-md shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                  className="min-w-[500px] p-2 text-gray-900 border-0 rounded-md shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                   placeholder="Latest AI news"
-                  value={apiKey ?? ""}
-                  onChange={(e) => setTopic(e.target.value)}
+                  value={`${process.env.NEXT_PUBLIC_GET_ARTICLES_API}?api_key=${apiKey}`}
                   disabled
                 />
               </form>
