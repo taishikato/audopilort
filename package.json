@@ -6,7 +6,9 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "dev:inngest": "npx inngest-cli@latest dev -u http://localhost:3000/api/create-inngest-function",
+    "genType": "npx supabase gen types typescript --project-id 'hsnfyjsofwdjkwciugrh' --schema public > types/supabase.ts"
   },
   "dependencies": {
     "@headlessui/react": "^1.7.14",
@@ -14,6 +16,7 @@
     "@supabase/auth-helpers-nextjs": "^0.6.0",
     "@supabase/supabase-js": "^2.20.0",
     "clsx": "^1.2.1",
+    "inngest": "^1.6.1",
     "next": "13.3.0",
     "react": "18.2.0",
     "react-dom": "18.2.0",
