@@ -8,7 +8,6 @@ import { Button } from "./Button";
 import { Container } from "./Container";
 import { Logo } from "./Logo";
 import { NavLink } from "./NavLink";
-import { useSupabase } from "../supabase-provider";
 import { createBrowserSupabaseClient } from "@supabase/auth-helpers-nextjs";
 
 function MobileNavLink({ href, children }: any) {
