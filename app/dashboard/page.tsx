@@ -1,35 +1,75 @@
 "use client";
 
 import { createBrowserSupabaseClient } from "@supabase/auth-helpers-nextjs";
-import { FormEvent, useState } from "react";
+import { FormEvent, useEffect, useState } from "react";
 
 export default function Dashboard() {
   const [supabase] = useState(() => createBrowserSupabaseClient());
-  const [topic, setTopic] = useState("");
+  const [userId, setUserId] = useState<string | null>(null);
+  const [topic, setTopic] = useState<string | null>(null);
+  const [apiKey, setApiKey] = useState<string | null>(null);
+
+  useEffect(() => {
+    const fetchUserAndTopicAndApiKey = async () => {
+      const {
+        data: { user },
+        error,
+      } = await supabase.auth.getUser();
+
+      if (!user || error) return;
+
+      const { id: userId } = user;
+
+      setUserId(userId);
+
+      const [topicResponse, apiKeyResponse] = await Promise.all([
+        supabase.from("topics").select("content").eq("user_id", userId),
+        supabase.from("api_keys").select("api_key").eq("user_id", userId),
+      ]);
+
+      if (
+        !topicResponse.error &&
+        topicResponse.data &&
+        topicResponse.data.length > 0
+      ) {
+        setTopic(topicResponse.data[0].content);
+      } else {
+        console.error(topicResponse.error);
+      }
+
+      if (
+        !apiKeyResponse.error &&
+        apiKeyResponse.data &&
+        apiKeyResponse.data.length > 0
+      ) {
+        setApiKey(apiKeyResponse.data[0].api_key);
+      } else {
+        console.error(apiKeyResponse.error);
+      }
+    };
+
+    fetchUserAndTopicAndApiKey();
+  }, [supabase]);
 
   const onSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    const { data, error } = await supabase.auth.getUser();
-
-    if (error || data.user === null) return;
-
     const { data: topicCount, count } = await supabase
       .from("topics")
       .select("*", { count: "exact" })
-      .eq("user_id", data.user.id);
+      .eq("user_id", userId);
 
     if (count === null) return;
 
     if (count > 0) {
       const { data: topicCount, count } = await supabase
         .from("topics")
-        .update({ content: topic, user_id: data.user.id })
-        .eq("user_id", data.user.id);
+        .update({ content: topic, user_id: userId })
+        .eq("user_id", userId);
     } else {
       const { data: topicCount, count } = await supabase
         .from("topics")
-        .insert({ content: topic, user_id: data.user.id });
+        .insert({ content: topic, user_id: userId });
     }
   };
 
@@ -66,7 +106,7 @@ export default function Dashboard() {
                   id="topic"
                   className="min-w-[300px] p-2 text-gray-900 border-0 rounded-md shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                   placeholder="Latest AI news"
-                  value={topic}
+                  value={topic ?? ""}
                   onChange={(e) => setTopic(e.target.value)}
                 />
                 <button
