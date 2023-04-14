@@ -1,6 +1,6 @@
 "use client";
 
-import { Fragment } from "react";
+import { Fragment, useState } from "react";
 import Link from "next/link";
 import { Popover, Transition } from "@headlessui/react";
 import clsx from "clsx";
@@ -9,6 +9,7 @@ import { Container } from "./Container";
 import { Logo } from "./Logo";
 import { NavLink } from "./NavLink";
 import { useSupabase } from "../supabase-provider";
+import { createBrowserSupabaseClient } from "@supabase/auth-helpers-nextjs";
 
 function MobileNavLink({ href, children }: any) {
   return (
@@ -92,7 +93,7 @@ function MobileNavigation() {
 }
 
 export function Header() {
-  const { supabase } = useSupabase();
+  const [supabase] = useState(() => createBrowserSupabaseClient());
 
   const signInWithGoogle = async () => {
     const { data, error } = await supabase.auth.signInWithOAuth({

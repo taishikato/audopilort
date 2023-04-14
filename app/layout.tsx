@@ -2,15 +2,10 @@
 
 import { useRouter } from "next/navigation";
 import "./global.css";
-import SupabaseProvider from "./supabase-provider";
 import { createBrowserSupabaseClient } from "@supabase/auth-helpers-nextjs";
 import { useEffect, useState } from "react";
 
-export default async function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function RootLayout(props: { children: React.ReactNode }) {
   const [supabase] = useState(() => createBrowserSupabaseClient());
   const router = useRouter();
 
@@ -33,9 +28,7 @@ export default async function RootLayout({
         head.tsx. Find out more at https://beta.nextjs.org/docs/api-reference/file-conventions/head
       */}
       <head />
-      <body className="min-h-screen bg-slate-50">
-        <SupabaseProvider>{children}</SupabaseProvider>
-      </body>
+      <body className="min-h-screen bg-slate-50">{props.children}</body>
     </html>
   );
 }

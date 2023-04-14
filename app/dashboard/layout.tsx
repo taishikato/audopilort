@@ -1,15 +1,17 @@
 "use client";
 
-import { Fragment, useState } from "react";
+import { Fragment, useEffect, useState } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 import {
+  ArrowLeftOnRectangleIcon,
   Bars3Icon,
   DocumentDuplicateIcon,
   HomeIcon,
   XMarkIcon,
 } from "@heroicons/react/24/outline";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
+import { createBrowserSupabaseClient } from "@supabase/auth-helpers-nextjs";
 
 const teams = [
   { id: 1, name: "Heroicons", href: "#", initial: "H", current: false },
@@ -23,7 +25,27 @@ function classNames(...classes: any) {
 
 const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
   const pathname = usePathname();
+  const router = useRouter();
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [supabase] = useState(() => createBrowserSupabaseClient());
+
+  const signOut = async () => {
+    const { error } = await supabase.auth.signOut();
+
+    router.push("/");
+  };
+
+  useEffect(() => {
+    const fetchUser = async () => {
+      const {
+        data: { session },
+      } = await supabase.auth.getSession();
+
+      if (!session) return router.push("/");
+    };
+
+    fetchUser();
+  }, [supabase, router]);
 
   const navigation = [
     {
@@ -252,18 +274,19 @@ const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
                 </ul>
               </li>
               <li className="mt-auto -mx-6">
-                <a
-                  href="#"
-                  className="flex items-center px-6 py-3 text-sm font-semibold leading-6 text-gray-900 gap-x-4 hover:bg-gray-50"
+                <button
+                  onClick={signOut}
+                  className="flex items-center w-full px-6 py-3 text-sm font-semibold leading-6 text-gray-900 gap-x-4 hover:bg-gray-50"
                 >
-                  <img
+                  {/* <img
                     className="w-8 h-8 rounded-full bg-gray-50"
                     src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
                     alt=""
-                  />
-                  <span className="sr-only">Your profile</span>
-                  <span aria-hidden="true">Tom Cook</span>
-                </a>
+                  /> */}
+                  <ArrowLeftOnRectangleIcon className="w-6 h-6 shrink-0" />
+                  <span className="sr-only">Sign out button</span>
+                  <span aria-hidden="true">Sign out</span>
+                </button>
               </li>
             </ul>
           </nav>
