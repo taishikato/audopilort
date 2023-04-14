@@ -1,4 +1,5 @@
-export const runtime = "experimental-edge";
+// export const runtime = "experimental-edge";
+"use client";
 
 export default function Article() {
   return (
