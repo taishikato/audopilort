@@ -9,7 +9,9 @@ function classNames(...classes: any) {
 }
 
 const ArticlesLayout = ({ children }: { children: React.ReactNode }) => {
-  const { id } = useParams();
+  const params = useParams();
+
+  const id = params!.id;
 
   return (
     <>

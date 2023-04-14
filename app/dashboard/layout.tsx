@@ -24,7 +24,7 @@ function classNames(...classes: any) {
 }
 
 const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
-  const pathname = usePathname();
+  const pathname = usePathname() as string;
   const router = useRouter();
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [supabase] = useState(() => createBrowserSupabaseClient());
