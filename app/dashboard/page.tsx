@@ -1,5 +1,9 @@
 "use client";
 
+import { createBrowserSupabaseClient } from "@supabase/auth-helpers-nextjs";
+import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
+
 export default function Dashboard() {
   return (
     <main className="lg:pl-72">

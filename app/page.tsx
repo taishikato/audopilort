@@ -1,25 +1,55 @@
+"use client";
+
 import Head from "next/head";
 import { Header } from "./components/Header";
 import { Hero } from "./components/Hero";
 import { Footer } from "./components/Footer";
-import { createServerComponentSupabaseClient } from "@supabase/auth-helpers-nextjs";
+import {
+  createBrowserSupabaseClient,
+  createServerComponentSupabaseClient,
+} from "@supabase/auth-helpers-nextjs";
 import { headers, cookies } from "next/headers";
-import { redirect } from "next/navigation";
+import { redirect, useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
 
 // do not cache this page
 export const revalidate = 0;
 
 export const runtime = "experimental-edge";
 
-export default async function Home() {
-  const supabase = createServerComponentSupabaseClient({
-    headers,
-    cookies,
-  });
+export default function Home() {
+  const [supabase] = useState(() => createBrowserSupabaseClient());
+  const router = useRouter();
 
-  const { data: session } = await supabase.auth.getSession();
+  useEffect(() => {
+    const fetchUser = async () => {
+      const {
+        data: { user },
+      } = await supabase.auth.getUser();
 
-  if (session.session !== null) redirect("/dashboard");
+      if (user === null) {
+        return;
+      }
+
+      // try to fetch user data to see if they already have an account or not.
+      const { count } = await supabase
+        .from("users")
+        .select("*", { count: "exact", head: true })
+        .eq("id", user.id);
+
+      if ((count as number) === 0) {
+        // register on DB
+        await supabase.from("users").insert({
+          id: user.id,
+          email: user.email,
+        });
+      }
+
+      router.push("/dashboard");
+    };
+
+    fetchUser();
+  }, [supabase, router]);
 
   return (
     <>
