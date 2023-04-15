@@ -1,15 +1,16 @@
 import Link from "next/link";
 
 import { Container } from "./Container";
-import { Logo } from "./Logo";
 import { NavLink } from "./NavLink";
 
 export function Footer() {
   return (
     <footer className="bg-slate-50">
       <Container>
-        <div className="py-16">
-          <Logo className="w-auto h-10 mx-auto" />
+        {/* <div className="py-16">
+          <div className="w-auto mx-auto italic font-black text-center">
+            AutoWrite
+          </div>
           <nav className="mt-10 text-sm" aria-label="quick links">
             <div className="flex justify-center -my-1 gap-x-6">
               <NavLink href="#features">Features</NavLink>
@@ -17,13 +18,14 @@ export function Footer() {
               <NavLink href="#pricing">Pricing</NavLink>
             </div>
           </nav>
-        </div>
+        </div> */}
         <div className="flex flex-col items-center py-10 border-t border-slate-400/10 sm:flex-row-reverse sm:justify-between">
           <div className="flex gap-x-6">
             <Link
-              href="https://twitter.com"
+              href="https://twitter.com/taishik_"
+              target="_blank"
               className="group"
-              aria-label="TaxPal on Twitter"
+              aria-label="AutoWrite on Twitter"
             >
               <svg
                 aria-hidden="true"
@@ -33,9 +35,10 @@ export function Footer() {
               </svg>
             </Link>
             <Link
-              href="https://github.com"
+              href="https://github.com/taishikato/auto-write"
+              target="_blank"
               className="group"
-              aria-label="TaxPal on GitHub"
+              aria-label="AutoWrite on GitHub"
             >
               <svg
                 aria-hidden="true"
@@ -46,7 +49,7 @@ export function Footer() {
             </Link>
           </div>
           <p className="mt-6 text-sm text-slate-500 sm:mt-0">
-            Copyright &copy; {new Date().getFullYear()} TaxPal. All rights
+            Copyright &copy; {new Date().getFullYear()} AutoWrite. All rights
             reserved.
           </p>
         </div>

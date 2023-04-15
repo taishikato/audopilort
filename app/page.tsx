@@ -8,6 +8,7 @@ import { createBrowserSupabaseClient } from "@supabase/auth-helpers-nextjs";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { v4 as uuidv4 } from "uuid";
+import { CallToAction } from "./components/CallToAction";
 
 export default function Home() {
   const [supabase] = useState(() => createBrowserSupabaseClient());
@@ -61,9 +62,9 @@ export default function Home() {
       <Header />
       <main>
         <Hero />
+        <CallToAction />
         {/* <PrimaryFeatures />
         <SecondaryFeatures />
-        <CallToAction />
         <Testimonials />
         <Pricing />
         <Faqs /> */}
