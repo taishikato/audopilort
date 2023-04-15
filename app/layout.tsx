@@ -4,6 +4,7 @@ import { useRouter } from "next/navigation";
 import "./global.css";
 import { createBrowserSupabaseClient } from "@supabase/auth-helpers-nextjs";
 import { useEffect, useState } from "react";
+import { Toaster } from "sonner";
 
 export default function RootLayout(props: { children: React.ReactNode }) {
   const [supabase] = useState(() => createBrowserSupabaseClient());
@@ -30,7 +31,10 @@ export default function RootLayout(props: { children: React.ReactNode }) {
         head.tsx. Find out more at https://beta.nextjs.org/docs/api-reference/file-conventions/head
       */}
       <head />
-      <body className="min-h-screen bg-slate-50">{props.children}</body>
+      <body className="min-h-screen bg-slate-50">
+        <Toaster richColors position="top-center" duration={5000} />
+        {props.children}
+      </body>
     </html>
   );
 }

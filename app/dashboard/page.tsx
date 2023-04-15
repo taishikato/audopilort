@@ -2,6 +2,7 @@
 
 import { createBrowserSupabaseClient } from "@supabase/auth-helpers-nextjs";
 import { FormEvent, useEffect, useState } from "react";
+import { toast } from "sonner";
 
 export default function Dashboard() {
   const [supabase] = useState(() => createBrowserSupabaseClient());
@@ -61,16 +62,30 @@ export default function Dashboard() {
 
     if (count === null) return;
 
+    let errorObj = null;
+
     if (count > 0) {
-      const { data: topicCount, count } = await supabase
+      const { error } = await supabase
         .from("topics")
         .update({ content: topic, user_id: userId })
         .eq("user_id", userId);
+
+      if (error) errorObj = error;
     } else {
-      const { data: topicCount, count } = await supabase
+      const { error } = await supabase
         .from("topics")
         .insert({ content: topic, user_id: userId });
+
+      if (error) errorObj = error;
     }
+
+    if (errorObj) {
+      toast.error(`An error occurred. ${errorObj.message}`);
+
+      return;
+    }
+
+    toast.success("Successfully saved.");
   };
 
   return (
