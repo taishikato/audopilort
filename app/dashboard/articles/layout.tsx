@@ -56,7 +56,7 @@ const ArticlesLayout = ({ children }: { children: React.ReactNode }) => {
           Articles
         </h3>
 
-        {articles.length > 0 && (
+        {articles.length > 0 ? (
           <ul className="space-y-1">
             {articles.map((a) => {
               return (
@@ -85,6 +85,10 @@ const ArticlesLayout = ({ children }: { children: React.ReactNode }) => {
               );
             })}
           </ul>
+        ) : (
+          <div className="px-3">
+            No article yet. All you can do is just wait!
+          </div>
         )}
       </aside>
     </>
