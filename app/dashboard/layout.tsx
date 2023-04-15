@@ -117,12 +117,8 @@ const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
                 {/* Sidebar component, swap this element with another sidebar if you like */}
                 <div className="flex flex-col px-6 pb-2 overflow-y-auto bg-white grow gap-y-5">
                   <div className="flex items-center h-16 shrink-0">
-                    <Link href="/">
-                      <img
-                        className="w-auto h-8"
-                        src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
-                        alt="Your Company"
-                      />
+                    <Link href="/" className="italic font-black">
+                      AutoWrite
                     </Link>
                   </div>
                   <nav className="flex flex-col flex-1">
@@ -155,38 +151,6 @@ const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
                           ))}
                         </ul>
                       </li>
-                      <li>
-                        <div className="text-xs font-semibold leading-6 text-gray-400">
-                          Your teams
-                        </div>
-                        <ul role="list" className="mt-2 -mx-2 space-y-1">
-                          {teams.map((team) => (
-                            <li key={team.name}>
-                              <a
-                                href={team.href}
-                                className={classNames(
-                                  team.current
-                                    ? "bg-gray-50 text-indigo-600"
-                                    : "text-gray-700 hover:text-indigo-600 hover:bg-gray-50",
-                                  "group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold"
-                                )}
-                              >
-                                <span
-                                  className={classNames(
-                                    team.current
-                                      ? "text-indigo-600 border-indigo-600"
-                                      : "text-gray-400 border-gray-200 group-hover:border-indigo-600 group-hover:text-indigo-600",
-                                    "flex h-6 w-6 shrink-0 items-center justify-center rounded-lg border text-[0.625rem] font-medium bg-white"
-                                  )}
-                                >
-                                  {team.initial}
-                                </span>
-                                <span className="truncate">{team.name}</span>
-                              </a>
-                            </li>
-                          ))}
-                        </ul>
-                      </li>
                     </ul>
                   </nav>
                 </div>
@@ -201,12 +165,8 @@ const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
         {/* Sidebar component, swap this element with another sidebar if you like */}
         <div className="flex flex-col px-6 overflow-y-auto bg-white border-r border-gray-200 grow gap-y-5">
           <div className="flex items-center h-16 shrink-0">
-            <Link href="/">
-              <img
-                className="w-auto h-8"
-                src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
-                alt="Your Company"
-              />
+            <Link href="/" className="italic font-black">
+              AutoWrite
             </Link>
           </div>
           <nav className="flex flex-col flex-1">
@@ -239,38 +199,7 @@ const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
                   ))}
                 </ul>
               </li>
-              <li>
-                <div className="text-xs font-semibold leading-6 text-gray-400">
-                  Your teams
-                </div>
-                <ul role="list" className="mt-2 -mx-2 space-y-1">
-                  {teams.map((team) => (
-                    <li key={team.name}>
-                      <a
-                        href={team.href}
-                        className={classNames(
-                          team.current
-                            ? "bg-gray-50 text-indigo-600"
-                            : "text-gray-700 hover:text-indigo-600 hover:bg-gray-50",
-                          "group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold"
-                        )}
-                      >
-                        <span
-                          className={classNames(
-                            team.current
-                              ? "text-indigo-600 border-indigo-600"
-                              : "text-gray-400 border-gray-200 group-hover:border-indigo-600 group-hover:text-indigo-600",
-                            "flex h-6 w-6 shrink-0 items-center justify-center rounded-lg border text-[0.625rem] font-medium bg-white"
-                          )}
-                        >
-                          {team.initial}
-                        </span>
-                        <span className="truncate">{team.name}</span>
-                      </a>
-                    </li>
-                  ))}
-                </ul>
-              </li>
+
               <li className="mt-auto -mx-6">
                 <button
                   onClick={signOut}
@@ -303,14 +232,18 @@ const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
         <div className="flex-1 text-sm font-semibold leading-6 text-gray-900">
           Dashboard
         </div>
-        <a href="#">
-          <span className="sr-only">Your profile</span>
+        <button
+          onClick={signOut}
+          className="text-xs font-semibold text-gray-700"
+        >
+          Sign out
+          {/* <span className="sr-only">Your profile</span>
           <img
             className="w-8 h-8 rounded-full bg-gray-50"
             src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
             alt=""
-          />
-        </a>
+          /> */}
+        </button>
       </div>
 
       {children}
