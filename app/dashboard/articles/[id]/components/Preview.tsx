@@ -4,8 +4,10 @@ import remarkBreaks from "remark-breaks";
 
 export const Preview = ({ content }: { content: string }) => {
   return (
-    <ReactMarkdown remarkPlugins={[remarkGfm, remarkBreaks]}>
-      {content}
-    </ReactMarkdown>
+    <div id="md-preview">
+      <ReactMarkdown remarkPlugins={[remarkGfm, remarkBreaks]}>
+        {content}
+      </ReactMarkdown>
+    </div>
   );
 };
