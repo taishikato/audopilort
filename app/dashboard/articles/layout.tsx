@@ -14,7 +14,7 @@ function classNames(...classes: any) {
 const ArticlesLayout = ({ children }: { children: React.ReactNode }) => {
   const [supabase] = useState(() => createBrowserSupabaseClient<Database>());
   const params = useParams();
-  const id = params!.id;
+  const id = params.id;
   const [articles, setArticles] = useState<
     Pick<
       Database["public"]["Tables"]["articles"]["Row"],

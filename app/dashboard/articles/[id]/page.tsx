@@ -7,6 +7,7 @@ import { useParams } from "next/navigation";
 import "../../../../styles/globals.scss";
 import { Tabs } from "./components/Tabs";
 import { Preview } from "./components/Preview";
+import { Draft } from "./components/Draft";
 
 export default function Article() {
   const [supabase] = useState(() => createBrowserSupabaseClient<Database>());
@@ -37,12 +38,15 @@ export default function Article() {
     <>
       <main className="lg:pl-72">
         <div className="xl:pl-96">
-          <div className="px-4 py-10 sm:px-6 lg:px-8 lg:py-6" id="md-preview">
+          <div
+            className="min-h-screen px-4 py-10 sm:px-6 lg:px-8 lg:py-6"
+            id="md-preview"
+          >
             <Tabs
               visibleScreen={visibleScreen}
               setVisibleScreen={setVisibleScreen}
             />
-            {visibleScreen === "draft" && <>Editor</>}
+            {visibleScreen === "draft" && <Draft content={content ?? ""} />}
             {visibleScreen === "preview" && <Preview content={content ?? ""} />}
           </div>
         </div>

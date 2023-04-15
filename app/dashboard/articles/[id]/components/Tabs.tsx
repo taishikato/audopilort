@@ -1,20 +1,5 @@
 import { SetStateAction } from "react";
 
-/*
-  This example requires some changes to your config:
-  
-  ```
-  // tailwind.config.js
-  module.exports = {
-    // ...
-    plugins: [
-      // ...
-      require('@tailwindcss/forms'),
-    ],
-  }
-  ```
-*/
-
 function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(" ");
 }
@@ -29,10 +14,10 @@ export const Tabs = ({
   const tabs = [
     { name: "Draft", current: visibleScreen === "draft", value: "draft" },
     { name: "Preview", current: visibleScreen === "preview", value: "preview" },
-  ];
+  ] as const;
 
   return (
-    <div>
+    <div className="mb-3">
       <div className="sm:hidden">
         <label htmlFor="tabs" className="sr-only">
           Select a tab
