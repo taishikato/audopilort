@@ -1,34 +1,50 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+<br />
+<p align="center">
 
-## Getting Started
+  <p align="center">
+   Get a new article draft every day!
+  </p>
 
-First, run the development server:
+  <p align="center"> 
+    <a href="https://auto-write.vercel.app/">View Demo</a>
+    ·
+    <a href="https://github.com/taishikato/auto-write/issues">Report Bug</a>
+    ·
+    <a href="https://github.com/taishikato/auto-write/issues">Request Feature</a>
+  </p>
+</p>
 
-```bash
-npm run dev
-# or
-yarn dev
-```
+<br/>
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+![Xnapper-2023-04-15-15 48 05](https://user-images.githubusercontent.com/980588/232256314-f9eec49f-22f0-487c-a724-4b30a3ba31d7.png)
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+## Story
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+I am not good at writing. That is why I created [Penelope AI](https://penelopeai.com/).
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+But I thought it might also be possible to help writers from another perspective. In other words, I would like to have AI write rough drafts and then have humans make corrections.
 
-## Learn More
+This idea inspired me to create [AutoWrite](https://auto-write.vercel.app/) for this hackathon. Due to time constraints, there are many features that could not be implemented, such as time zone support. For now, this is just an MVP 😅
 
-To learn more about Next.js, take a look at the following resources:
+## Supabase Usage
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+1. Supabase Auth - to handle user
+2. Supabase DB - to store project data
+3. Supabase Edge Function - for users to fetch their articles data
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+### 🔨 Built With
 
-## Deploy on Vercel
+- [Next.js app dir](https://nextjs.org/)
+- [Supabase](https://supabase.com)
+- [Render](https://render.com/)
+- [Open AI ChatGPT API](https://openai.com/blog/introducing-chatgpt-and-whisper-apis)
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Author
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+- Taishi ([@taishik_](https://twitter.com/taishik_))
+
+If you like my work, please buy me a coffee ☕️
+
+<a href="https://www.buymeacoffee.com/taishik" target="_blank">
+    <img src="https://www.buymeacoffee.com/assets/img/custom_images/yellow_img.png" alt="Logo" >
+</a>
