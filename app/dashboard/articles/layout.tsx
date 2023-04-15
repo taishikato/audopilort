@@ -3,15 +3,49 @@
 import Link from "next/link";
 import { DocumentIcon } from "@heroicons/react/24/outline";
 import { useParams } from "next/navigation";
+import { useEffect, useState } from "react";
+import { createBrowserSupabaseClient } from "@supabase/auth-helpers-nextjs";
+import { Database } from "../../../types/supabase";
 
 function classNames(...classes: any) {
   return classes.filter(Boolean).join(" ");
 }
 
 const ArticlesLayout = ({ children }: { children: React.ReactNode }) => {
+  const [supabase] = useState(() => createBrowserSupabaseClient<Database>());
   const params = useParams();
-
   const id = params!.id;
+  const [articles, setArticles] = useState<
+    Pick<
+      Database["public"]["Tables"]["articles"]["Row"],
+      "content" | "id" | "created_at"
+    >[]
+  >([]);
+
+  useEffect(() => {
+    const fetchArticles = async () => {
+      const {
+        data: { user },
+      } = await supabase.auth.getUser();
+
+      if (!user) return;
+
+      const { data } = await supabase
+        .from("articles")
+        .select("id, created_at, content")
+        .eq("user_id", user.id)
+        .order("created_at", { ascending: false });
+
+      if (!data) {
+        setArticles([]);
+        return;
+      }
+
+      setArticles(data);
+    };
+
+    fetchArticles();
+  }, [supabase]);
 
   return (
     <>
@@ -22,52 +56,36 @@ const ArticlesLayout = ({ children }: { children: React.ReactNode }) => {
           Articles
         </h3>
 
-        <ul className="space-y-1">
-          <li>
-            <Link
-              href="/dashboard/articles/123"
-              className={classNames(
-                id === "123"
-                  ? "bg-gray-50 text-indigo-600"
-                  : "text-gray-700 hover:text-indigo-600 hover:bg-gray-50",
-                "group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold"
-              )}
-            >
-              <DocumentIcon
-                className={classNames(
-                  id === "123"
-                    ? "text-indigo-600"
-                    : "text-gray-400 group-hover:text-indigo-600",
-                  "h-6 w-6 shrink-0"
-                )}
-                aria-hidden="true"
-              />
-              How to get the latest AI
-            </Link>
-          </li>
-          <li>
-            <Link
-              href="/dashboard/articles/456"
-              className={classNames(
-                id === "456"
-                  ? "bg-gray-50 text-indigo-600"
-                  : "text-gray-700 hover:text-indigo-600 hover:bg-gray-50",
-                "group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold"
-              )}
-            >
-              <DocumentIcon
-                className={classNames(
-                  id === "456"
-                    ? "text-indigo-600"
-                    : "text-gray-400 group-hover:text-indigo-600",
-                  "h-6 w-6 shrink-0"
-                )}
-                aria-hidden="true"
-              />
-              How to use LangChain
-            </Link>
-          </li>
-        </ul>
+        {articles.length > 0 && (
+          <ul className="space-y-1">
+            {articles.map((a) => {
+              return (
+                <li key={a.id}>
+                  <Link
+                    href={`/dashboard/articles/${a.id}`}
+                    className={classNames(
+                      id === a.id
+                        ? "bg-gray-50 text-indigo-600"
+                        : "text-gray-700 hover:text-indigo-600 hover:bg-gray-50",
+                      "group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold"
+                    )}
+                  >
+                    <DocumentIcon
+                      className={classNames(
+                        id === "123"
+                          ? "text-indigo-600"
+                          : "text-gray-400 group-hover:text-indigo-600",
+                        "h-6 w-6 shrink-0"
+                      )}
+                      aria-hidden="true"
+                    />
+                    <span className="line-clamp-1">{a.content}</span>
+                  </Link>
+                </li>
+              );
+            })}
+          </ul>
+        )}
       </aside>
     </>
   );
