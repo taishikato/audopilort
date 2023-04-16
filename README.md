@@ -18,6 +18,10 @@
 
 ![Xnapper-2023-04-15-15 48 05](https://user-images.githubusercontent.com/980588/232256314-f9eec49f-22f0-487c-a724-4b30a3ba31d7.png)
 
+## Demo video
+
+https://user-images.githubusercontent.com/980588/232339419-42fda49d-b7c1-4bba-8560-205b9e9feb2e.mp4
+
 ## Story
 
 I am not good at writing. That is why I created [Penelope AI](https://penelopeai.com/).
@@ -29,7 +33,7 @@ This idea inspired me to create [AutoWrite](https://auto-write.vercel.app/) for 
 ## Supabase Usage
 
 1. Supabase Auth - to handle user
-2. Supabase DB - to store project data
+2. Supabase DB - to store project data and cron job
 3. Supabase Edge Function - for users to fetch their articles data
 
 ### 🔨 Built With
