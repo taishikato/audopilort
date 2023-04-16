@@ -43,6 +43,22 @@ This idea inspired me to create [AutoWrite](https://auto-write.vercel.app/) for 
 - [Render](https://render.com/)
 - [Open AI ChatGPT API](https://openai.com/blog/introducing-chatgpt-and-whisper-apis)
 
+### How the app works
+
+#### Generating drafts
+
+![download](https://user-images.githubusercontent.com/980588/232339919-55764349-1a00-4c23-8b3f-1e0138ebae55.png)
+
+#### Fetching your drafts
+
+![download (1)](https://user-images.githubusercontent.com/980588/232340174-f1f7348c-9934-4c04-9551-d0110648fb32.png)
+
+
+
+### Replated repos
+
+- [taishikato/auto-write-render-function](https://github.com/taishikato/auto-write-render-function)
+
 ## Author
 
 - Taishi ([@taishik_](https://twitter.com/taishik_))
